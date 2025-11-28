@@ -3,10 +3,10 @@ require("dotenv").config();
 
 let sequelize;
 
-// Check if DATABASE_URL is provided (Render automatically provides this)
+// Check if DATABASE_URL is provided (Render/production)
 if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: "postgres",
+    dialect: "mysql",
     logging: false,
     dialectOptions: {
       ssl: {
@@ -23,14 +23,8 @@ if (process.env.DATABASE_URL) {
     process.env.DB_PASS,
     {
       host: process.env.DB_HOST,
-      dialect: process.env.DB_DIALECT || "postgres",
+      dialect: process.env.DB_DIALECT || "mysql",
       logging: false,
-      dialectOptions: {
-        ssl: {
-          require: true,
-          rejectUnauthorized: false,
-        },
-      },
     }
   );
 }
